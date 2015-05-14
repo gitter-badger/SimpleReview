@@ -1,0 +1,4 @@
+bottle
+pysvn2
+whatthepatch
+mysql-connector-python

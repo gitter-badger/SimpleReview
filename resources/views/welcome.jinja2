@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <title>{% block title %}SimpleReview{% endblock %}</title>
+    <style>
+        .custom-code-line-num {
+            width: 50px;
+            background-color: #ababab;
+            border-right: 1px solid #3a3a3a;
+            text-align: right;
+            display: inline-block;
+        }
+        .custom-code {
+            font-family: "Courier New", courier, monospace;
+            white-space: nowrap;
+            overflow-x: scroll;
+            overflow-y: hidden;
+        }
+        .custom-code .bg-success {
+            background-color: rgba(0, 128, 0, 0.50);
+        }
+        .custom-code-line:hover {
+            background-color: rgba(128, 128, 0, 0.50);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container-fluid">
+
+        <div class="page-header">
+            <h1>SimpleReview</h1>
+        </div>
+
+        <h2>Projects</h2>
+
+        <table class="table table-bordered table-condensed">
+            <tr>
+                <th>ID</th>
+                <th>Alias</th>
+                <th>Name</th>
+                <th>URL</th>
+                <th>Target</th>
+                <th>Action</th>
+            </tr>
+{% for item in items %}
+            <tr>
+                <td>{{ item.oid }}</td>
+                <td>{{ item.alias }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.url }}</td>
+                <td>{{ item.target }}</td>
+                <td>
+                    <a href="/project/{{ item.oid }}/history" class="btn btn-xs btn-primary">Review</a>
+                </td>
+            </tr>
+{% endfor %}
+        </table>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <title>{% block title %}SimpleReview{% endblock %}</title>
+    <style>
+        .custom-code-line-num {
+            width: 50px;
+            background-color: #ababab;
+            border-right: 1px solid #3a3a3a;
+            text-align: right;
+            display: inline-block;
+        }
+        .custom-code {
+            font-family: "Courier New", courier, monospace;
+            white-space: nowrap;
+            overflow-x: scroll;
+            overflow-y: hidden;
+        }
+        .custom-code .bg-success {
+            background-color: rgba(0, 128, 0, 0.50);
+        }
+        .custom-code-line {
+            white-space: pre;
+        }
+        .custom-code-line:hover {
+            background-color: rgba(128, 128, 0, 0.50);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container-fluid">
+
+        <div class="page-header">
+            <h1>SimpleReview</h1>
+        </div>
+
+        <div class="alert alert-info" role="alert">Your request on Subversion server is {{ svn_time }} sec.</div>
+
+        <h2>Source changes on {{ target }} </h2>
+
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <h3>Revision {{ revision_start }}</h3>
+
+                <div class="custom-code">
+{% for n in range(1, orig_src.get_line_count()) %}
+                    <div class="custom-code-line"><span class="custom-code-line-num" data-value="{{ n }}">{{ n }}</span><span class="{{ orig_src.get_line_class(n) }}">{{ orig_src.get_line_text(n) | code_escape }}</span></div>
+{% endfor %}
+                </div>
+
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <h3>Revision {{ revision_end }}</h3>
+
+                <div class="custom-code">
+{% for n in range(1, new_src.get_line_count()) %}
+                    <div class="custom-code-line"><span class="custom-code-line-num" data-value="{{ n }}">{{ n }}</span><span class="{{ new_src.get_line_class(n) }}">{{ new_src.get_line_text(n) | code_escape }}</span></div>
+{% endfor %}
+                </div>
+
+            </div>
+        </div>
+
+        <h2>Comment</h2>
+
+<h3>Message here</h3>
+
+        <form method="post" class="form-horizontal" id="comment">
+            <div class="form-group">
+                <label for="exampleInputEmail1" class="col-sm-2 control-label">Email</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Your email address">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1" class="col-sm-2 control-label">Message</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" id="exampleInputEmail1" placeholder="Message"></textarea>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+
+
+    </div>
+
+<script type="text/javascript">
+$(function() {
+    $('.custom-code-line-num').click(function() {
+        var $line = $(this).parent('.custom-code-line');
+        $('#comment').insertAfter($line);
+    });
+});
+</script>
+
+</body>
+</html>

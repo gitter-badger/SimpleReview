@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <title>{% block title %}SimpleReview{% endblock %}</title>
+</head>
+<body>
+
+    <div class="container-fluid">
+
+        <div class="page-header">
+            <h1>SimpleReview</h1>
+        </div>
+
+        <div class="alert alert-info" role="alert">Your request on Subversion server is {{ svn_time }} sec.</div>
+
+        <h2>History {{ revision_start }} - {{ revision_end }}</h2>
+
+        <table class="table table-bordered table-hover table-condensed">
+            <tr>
+                <th>Revision</th>
+                <th>Author</th>
+                <th>Date</th>
+                <th>Message</th>
+                <th>Action</th>
+            </tr>
+{% for logentry in log.logentry %}
+            <tr>
+                <td>r{{ logentry.revision }}</td>
+                <td>{{ logentry.author }}</td>
+                <td>{{ logentry.date }}</td>
+                <td>
+<pre>{{ logentry.msg }}</pre>
+                </td>
+                <td>
+                    <a href="/project/{{ project_id }}/revision/{{ logentry.revision }}" class="btn btn-xs btn-primary">Review</a>
+                </td>
+            </tr>
+{% endfor %}
+        </table>
+
+    </div>
+
+</body>
+</html>
