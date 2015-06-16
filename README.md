@@ -1,5 +1,7 @@
 # SimpleReview
 
+[![Join the chat at https://gitter.im/simplereview/SimpleReview](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/simplereview/SimpleReview?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 SimpleReview is Subversion review system
 
 ## Installation
